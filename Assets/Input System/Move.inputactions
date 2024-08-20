@@ -1,0 +1,45 @@
+{
+    "name": "Move",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "840b5c98-ae63-4177-84e8-1bf5fd612941",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "27fe8a6e-77a0-43c5-9d27-cdcd2fe76510",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "751d7dde-87b8-4d14-aac3-788045e7eabb",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3e8d7ea-5718-4bd0-9c1f-29585b817b54",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
