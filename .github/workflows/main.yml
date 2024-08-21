@@ -2,7 +2,7 @@ name: Build Project and Publish to itch.io
 on: [push]
 jobs:
   build:
-    name: Build Project
+    name: Build Project and Publish to itch.io
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency: 
@@ -32,9 +32,9 @@ jobs:
         with:
           targetPlatform: WebGL
        # Return License (Un-Comment if you're using a pro license)
-       #- name: Return license
-       #  uses: game-ci/unity-return-license@v1
-       #  if: always()
+      - name: Return license
+        uses: game-ci/unity-return-license@v4
+        if: always()
       # Upload to Itch
       - uses: josephbmanley/butler-publish-itchio-action@master
         env:
