@@ -32,9 +32,9 @@ jobs:
         with:
           targetPlatform: WebGL
        # Return License (Un-Comment if you're using a pro license)
-      - name: Return license
-        uses: game-ci/unity-return-license@v2
-        if: always()
+      #- name: Return license
+        #uses: game-ci/unity-return-license@v2
+        #if: always()
       # Upload to Itch
       - uses: josephbmanley/butler-publish-itchio-action@master
         env:
@@ -43,3 +43,40 @@ jobs:
           ITCH_GAME: robotics-simulator
           ITCH_USER: skolodny
           PACKAGE: build/WebGL
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          # Comment this out if you're using a pro license
+          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          # Un-Comment the following lines if you're using a pro license
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          targetPlatform: win
+       # Return License (Un-Comment if you're using a pro license)
+       #- name: Return license
+       #  uses: game-ci/unity-return-license@v1
+       #  if: always()
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          # Comment this out if you're using a pro license
+          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          # Un-Comment the following lines if you're using a pro license
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          targetPlatform: mac
+       # Return License (Un-Comment if you're using a pro license)
+       #- name: Return license
+       #  uses: game-ci/unity-return-license@v1
+       #  if: always()
+       # Output
+      - uses: actions/upload-artifact@v2
+        with:
+           name: Build
+           path: build
+
+           
