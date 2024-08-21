@@ -41,7 +41,8 @@ public class SceneSwitcher : MonoBehaviour
             Display.displays[targetDisplay].Activate();
 
             // Set the resolution to 1920x1080 in windowed mode
-            Screen.SetResolution(1920, 1080, false, 60);
+            Screen.SetResolution(640, 480, FullScreenMode.Windowed, new RefreshRate() { numerator = 60, denominator = 1 });
+    
 
             Debug.Log($"Switched to {sceneToLoad} on Display {targetDisplay + 1} with resolution 1920x1080 in windowed mode.");
         }
