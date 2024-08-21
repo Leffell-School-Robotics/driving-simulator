@@ -35,11 +35,6 @@ jobs:
        #- name: Return license
        #  uses: game-ci/unity-return-license@v1
        #  if: always()
-       # Output
-      - uses: actions/upload-artifact@v4
-        with:
-           name: Build
-           path: build
       # Upload to Itch
       - uses: josephbmanley/butler-publish-itchio-action@master
         env:
