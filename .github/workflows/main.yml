@@ -20,7 +20,7 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build project
+      - name: Build project for Itch.io (WebGL)
         uses: game-ci/unity-builder@v4
         env:
           # Comment this out if you're using a pro license
@@ -43,7 +43,7 @@ jobs:
           ITCH_GAME: robotics-simulator
           ITCH_USER: skolodny
           PACKAGE: build/WebGL
-      - name: Build project
+      - name: Build project for Windows
         uses: game-ci/unity-builder@v2
         env:
           # Comment this out if you're using a pro license
@@ -58,7 +58,7 @@ jobs:
        #- name: Return license
        #  uses: game-ci/unity-return-license@v1
        #  if: always()
-      - name: Build project
+      - name: Build project for Mac
         uses: game-ci/unity-builder@v2
         env:
           # Comment this out if you're using a pro license
