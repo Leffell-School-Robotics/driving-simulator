@@ -21,7 +21,7 @@ jobs:
           key: Library
       # Build
       - name: Build project
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v4
         env:
           # Comment this out if you're using a pro license
           # UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
