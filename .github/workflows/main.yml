@@ -2,7 +2,7 @@ name: Build Project and Publish to itch.io
 on: [push]
 jobs:
   build:
-    name: Build Project and Publish to itch.io ✨
+    name: Build Project
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency: 
@@ -11,11 +11,11 @@ jobs:
     steps:
       # Checkout
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       # Cache
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: Library
           key: Library
@@ -36,7 +36,7 @@ jobs:
        #  uses: game-ci/unity-return-license@v1
        #  if: always()
        # Output
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
            name: Build
            path: build
