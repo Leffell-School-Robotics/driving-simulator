@@ -33,7 +33,7 @@ jobs:
           targetPlatform: WebGL
        # Return License (Un-Comment if you're using a pro license)
       - name: Return license
-        uses: game-ci/unity-return-license@v4
+        uses: game-ci/unity-return-license@v2
         if: always()
       # Upload to Itch
       - uses: josephbmanley/butler-publish-itchio-action@master
