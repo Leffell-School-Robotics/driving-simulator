@@ -1,13 +1,24 @@
 name: Build Project and Publish to itch.io
 on: [push]
 jobs:
-  build:
-    name: Build Project and Publish to itch.io
+  buildForAllSupportedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     # This stops builds that are in-progress once a new commit comes in
     concurrency: 
       group: unity-build
       cancel-in-progress: true
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          # - StandaloneWindows # Build a Windows standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          #- StandaloneLinux64 # Build a Linux 64-bit standalone.
+          # - iOS # Build an iOS player.
+          # - Android # Build an Android .apk standalone app.
+          - WebGL # WebGL.
     steps:
       # Checkout
       - name: Checkout repository
@@ -20,7 +31,7 @@ jobs:
           path: Library
           key: Library
       # Build
-      - name: Build project for Itch.io (WebGL)
+      - name: Build for ${{ matrix.targetPlatform }}
         uses: game-ci/unity-builder@v4
         env:
           # Comment this out if you're using a pro license
@@ -31,11 +42,15 @@ jobs:
           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
         with:
           targetPlatform: WebGL
-       # Return License (Un-Comment if you're using a pro license)
-      #- name: Return license
-        #uses: game-ci/unity-return-license@v2
-        #if: always()
-      # Upload to Itch
+  uploadWebGLBuild:
+      needs: buildForAllSupportedPlatforms
+      name: Build for ${{ matrix.targetPlatform }}
+      runs-on: ubuntu-latest
+      # This stops builds that are in-progress once a new commit comes in
+      concurrency: 
+        group: unity-build
+        cancel-in-progress: true
+      steps:
       - name: Upload WebGL build to Itch.io
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
@@ -44,37 +59,6 @@ jobs:
           ITCH_GAME: robotics-simulator
           ITCH_USER: skolodny
           PACKAGE: build/WebGL
-      - name: Build project for Windows
-        uses: game-ci/unity-builder@v2
-        env:
-          # Comment this out if you're using a pro license
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          # Un-Comment the following lines if you're using a pro license
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-        with:
-          targetPlatform: win
-       # Return License (Un-Comment if you're using a pro license)
-       #- name: Return license
-       #  uses: game-ci/unity-return-license@v1
-       #  if: always()
-      - name: Build project for Mac
-        uses: game-ci/unity-builder@v2
-        env:
-          # Comment this out if you're using a pro license
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          # Un-Comment the following lines if you're using a pro license
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-        with:
-          targetPlatform: mac
-       # Return License (Un-Comment if you're using a pro license)
-       #- name: Return license
-       #  uses: game-ci/unity-return-license@v1
-       #  if: always()
-       # Output
       - uses: actions/upload-artifact@v2
         with:
            name: Build
