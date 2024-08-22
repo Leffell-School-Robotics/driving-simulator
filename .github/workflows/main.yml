@@ -64,7 +64,7 @@ jobs:
       run: echo "test"
       id: version
     - name: release
-      uses: actions/create-release@v2
+      uses: actions/create-release@v1
       id: create_release
       with:
         draft: true
@@ -75,7 +75,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: upload StandaloneOSX artifact
-      uses: actions/upload-release-asset@v2
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
@@ -84,7 +84,7 @@ jobs:
         asset_name: StandaloneOSX.zip
         asset_content_type: application/zip
     - name: upload StandaloneWindows64 artifact
-      uses: actions/upload-release-asset@v2
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
@@ -93,7 +93,7 @@ jobs:
         asset_name: StandaloneWindows64.zip
         asset_content_type: application/zip
     - name: upload WebGL artifact
-      uses: actions/upload-release-asset@v2
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
