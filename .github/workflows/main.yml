@@ -42,16 +42,8 @@ jobs:
           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
         with:
           targetPlatform: WebGL
-  uploadWebGLBuild:
-      needs: buildForAllSupportedPlatforms
-      name: Build for ${{ matrix.targetPlatform }}
-      runs-on: ubuntu-latest
-      # This stops builds that are in-progress once a new commit comes in
-      concurrency: 
-        group: unity-build
-        cancel-in-progress: true
-      steps:
       - name: Upload WebGL build to Itch.io
+        if: ${{ matrix.targetPlatform === WebGL }}
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
