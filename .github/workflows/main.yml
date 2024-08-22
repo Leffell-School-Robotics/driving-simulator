@@ -55,6 +55,51 @@ jobs:
           ITCH_GAME: robotics-simulator
           ITCH_USER: skolodny
           PACKAGE: build/WebGL
-
+  generateRelease:
+    name: Generate Release
+    runs-on: ubuntu-latest
+    needs: buildForAllSupportedPlatforms
+    steps:
+    - name: version
+      run: echo "test"
+      id: version
+    - name: release
+      uses: actions/create-release@v2
+      id: create_release
+      with:
+        draft: true
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: upload Mac artifact
+      uses: actions/upload-release-asset@v2
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build
+        asset_name: StandaloneOSX.zip
+        asset_content_type: application/zip
+    - name: upload StandaloneWindows64 artifact
+      uses: actions/upload-release-asset@v2
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build
+        asset_name: StandaloneWindows64.zip
+        asset_content_type: application/zip
+    - name: upload WebGL artifact
+      uses: actions/upload-release-asset@v2
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build
+        asset_name: WebGL.zip
+        asset_content_type: application/zip
 
            
