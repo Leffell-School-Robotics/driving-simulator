@@ -58,6 +58,7 @@ jobs:
   generateRelease:
     name: Generate Release
     runs-on: ubuntu-latest
+    permissions: write-all
     needs: buildForAllSupportedPlatforms
     steps:
     - name: version
