@@ -7,7 +7,7 @@ jobs:
     # This stops builds that are in-progress once a new commit comes in
     concurrency: 
       group: unity-build-${{ matrix.targetPlatform }}
-      cancel-in-progress: false
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
