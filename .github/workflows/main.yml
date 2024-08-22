@@ -17,7 +17,7 @@ jobs:
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
           #- StandaloneLinux64 # Build a Linux 64-bit standalone.
           # - iOS # Build an iOS player.
-          # - Android # Build an Android .apk standalone app.
+          - Android # Build an Android .apk standalone app.
           - WebGL # WebGL.
     steps:
       # Checkout
@@ -51,7 +51,7 @@ jobs:
           ITCH_GAME: robotics-simulator
           ITCH_USER: skolodny
           PACKAGE: build/WebGL
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
            name: Build
            path: build
