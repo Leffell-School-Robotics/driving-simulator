@@ -7,17 +7,23 @@ public class SceneSwitcher : MonoBehaviour
 {
     public string sceneToLoad = "test";  // Name of the scene to load
     public int targetDisplay = 0;   // Index of the target display (0 for Display 1, 1 for Display 2)
-
+    //private CameraController cameracontroller_;
     void Start()
     {
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(SwitchScene);
+        
     }
 
     void SwitchScene()
     {
         // Start the scene loading process
         StartCoroutine(LoadSceneAndSetResolution());
+        if (sceneToLoad != "mainMenu" && sceneToLoad != "cameraSettings" && sceneToLoad != "levelsMenu")
+        {
+            //cameracontroller_ = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+            CameraController.Instance.moveCamera();
+        }
     }
 
     IEnumerator LoadSceneAndSetResolution()
