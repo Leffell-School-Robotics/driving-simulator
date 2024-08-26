@@ -12,6 +12,9 @@ public class enableRealistic : MonoBehaviour {
     {
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(ModifyTxt);
+        if (cameraSettings.Instance.getCameraMode() == "realistic"){
+            btn.Select();
+        }
     }
     
     void ModifyTxt()
