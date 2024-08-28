@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class enableRealistic : MonoBehaviour {
     
-    //cameraSettings cameraSettings_;
 
     void Start() 
     {
@@ -19,7 +18,6 @@ public class enableRealistic : MonoBehaviour {
     
     void ModifyTxt()
     {              
-        //cameraSettings_ = GameObject.FindGameObjectWithTag("CameraSettings").GetComponent<cameraSettings>();
         cameraSettings.Instance.setCameraMode("realistic");
     }
 }
